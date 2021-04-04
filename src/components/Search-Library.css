@@ -1,0 +1,28 @@
+
+.principal p{
+    margin: 20px;
+    font-size: 25px;
+    line-height: 24px;
+}
+
+.input{
+    display: flex;
+    justify-content: flex-end;
+    margin: 10px;
+}
+
+.input input{
+    width: 40%;
+    height: 30px;
+    border: 1px solid #DEDEDE;
+    box-sizing: border-box;
+    border-radius: 15px;
+}
+
+.content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    background: coral;
+  }
