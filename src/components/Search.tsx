@@ -53,7 +53,6 @@ export default (props: Props) => {
 
     const [apiMovies,setapiMovies] = useState<Server[]>([]);
     const buntoInput = async () =>{
-        console.log(inputValor);
         let listOMDB: Array<any> = await requestApi(inputValor);
         
         //let listApi: Array<Server> = await requestApiGetAll();

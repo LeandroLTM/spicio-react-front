@@ -24,10 +24,7 @@ export const requestRatings = async (value: string) =>{
 }
 
 export const requestApi = async (value: string) =>{
-    console.log(API_KEY)
-    console.log(API_BASE)
     const req = await fetch(`${API_BASE}${API_KEY}s=${value}`);
-    //const req = await fetch('http://www.omdbapi.com/?apikey=ce7a9b40&t=avengers&plot=full');
     const json = await req.json();
     
     if(json.Response === 'True'){
