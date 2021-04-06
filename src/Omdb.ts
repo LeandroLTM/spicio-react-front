@@ -1,18 +1,51 @@
-const API_KEY = 'apikey=ce7a9b40&';
-const API_BASE = 'http://www.omdbapi.com/?';
+const API_KEY = process.env.REACT_APP_API_KEY;
+const API_BASE = process.env.REACT_APP_API_BASE;
 
-export interface Film{
-    title: string
-    name: string
-    poster: string
-    ratings: string
+export interface Movieimcomplet{
+    Poster: string,
+    Title: string,
+    Type: string,
+    Year: string,
+    imdbID: string,
+}
+
+export interface Moviecompleted{
+    idMovie: string,
+    title: string,
+    poster: string,
+    ratings: string,
+}
+
+export const requestRatings = async (value: string) =>{
+    const req = await fetch(`${API_BASE}${API_KEY}t=${value}`);
+    const json = await req.json();
+    return json.imdbRating;
+    //return '10';
 }
 
 export const requestApi = async (value: string) =>{
-    
-    //const req = await fetch(`${API_BASE}${API_KEY}s=${value}&page=20`);
+    console.log(API_KEY)
+    console.log(API_BASE)
+    const req = await fetch(`${API_BASE}${API_KEY}s=${value}`);
     //const req = await fetch('http://www.omdbapi.com/?apikey=ce7a9b40&t=avengers&plot=full');
-    //const json = await req.json();
+    const json = await req.json();
+    
+    if(json.Response === 'True'){
+        const jsonimcomplet: Movieimcomplet[] = json.Search;
+        let filmimcomplet = jsonimcomplet.reduce((vec: Moviecompleted[],value)=>{
+            vec.push({
+                poster: value.Poster,
+                title: value.Title,
+                idMovie: value.imdbID,
+                ratings: '',
+            })
+            return vec;
+        },[]);
+        return filmimcomplet;
+    }
+
+    return [];
+
     /*
     return [{Actors: "Robert Downey Jr., Chris Evans, Mark Ruffalo, Chris Hemsworth",
             Awards: "Nominated for 1 Oscar. Another 38 wins & 79 nominations.",
@@ -64,45 +97,64 @@ export const requestApi = async (value: string) =>{
             imdbRating: "8.0",
             imdbVotes: "1,268,647"}];
     */
+
+    /*
     return [{
+        _id: "606a6c5274dbc016f8931191",
+        idMovie: "idteste",
         title: 'teste',
-        name:"asdasdasd",
         poster: "https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg",
-        ratings: '12'
+        ratings: '12',
+        __v: 0
     },{
-        title: 'teste2',
-        name: 'sadasdas',
-        poster: "https://m.media-amazon.com/images/M/MV5BZDJjOTE0N2EtMmRlZS00NzU0LWE0ZWQtM2Q3MWMxNjcwZjBhXkEyXkFqcGdeQXVyNDk3NzU2MTQ@._V1_SX300.jpg",
-        ratings: '12'
-    },{
-        title: 'teste3',
-        name: 'sadasdas',
-        poster: "https://m.media-amazon.com/images/M/MV5BN2ZiOTc4NDItNzM4MS00NzUwLWI2NWYtNTIzNTlkZWEwNGU5XkEyXkFqcGdeQXVyODgxMDAxMjY@._V1_SX300.jpg",
-        ratings: '12'
-    },{
-        title: 'teste4',
-        name: 'sadasdas',
-        poster: "https://m.media-amazon.com/images/M/MV5BOGFmYWJiNzMtYjJkNy00NDNiLTg1NTItZGU5ZTc2NDM0YWQyXkEyXkFqcGdeQXVyMjU5OTg5NDc@._V1_SX300.jpg",
-        ratings: '12'
-    },{
-        title: 'teste4',
-        name: 'sadasdas',
+        _id: "606a6c5274dbc016f8931191",
+        idMovie: "idteste",
+        title: 'teste',
         poster: "https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg",
-        ratings: '12'
+        ratings: '12',
+        __v: 0
     },{
-        title: 'teste4',
-        name: 'sadasdas',
+        _id: "606a6c5274dbc016f8931191",
+        idMovie: "idteste",
+        title: 'teste',
         poster: "https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg",
-        ratings: '12'
+        ratings: '12',
+        __v: 0
     },{
-        title: 'teste4',
-        name: 'sadasdas',
+        _id: "606a6c5274dbc016f8931191",
+        idMovie: "idteste",
+        title: 'teste',
         poster: "https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg",
-        ratings: '12'
+        ratings: '12',
+        __v: 0
     },{
-        title: 'teste4',
-        name: 'sadasdas',
+        _id: "606a6c5274dbc016f8931191",
+        idMovie: "idteste",
+        title: 'teste',
         poster: "https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg",
-        ratings: '12'
+        ratings: '12',
+        __v: 0
+    },{
+        _id: "606a6c5274dbc016f8931191",
+        idMovie: "idteste",
+        title: 'teste',
+        poster: "https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg",
+        ratings: '12',
+        __v: 0
+    },{
+        _id: "606a6c5274dbc016f8931191",
+        idMovie: "idteste",
+        title: 'teste',
+        poster: "https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg",
+        ratings: '12',
+        __v: 0
+    },{
+        _id: "606a6c5274dbc016f8931191",
+        idMovie: "idteste",
+        title: 'teste',
+        poster: "https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg",
+        ratings: '12',
+        __v: 0
     }];
+    */
 }

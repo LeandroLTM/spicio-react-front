@@ -1,9 +1,12 @@
 import React from 'react';
 import {Button,Dialog,DialogActions,DialogContent,DialogContentText,DialogTitle,
         makeStyles} from '@material-ui/core';
+import { Server } from '../NestApi';
 type Props = {
     setOpen: Function,
-    open: boolean
+    open: boolean,
+    setApiDelete: Function,
+    item: Server
 }
 
 const useStyles = makeStyles({
@@ -32,6 +35,11 @@ export default (props: Props) => {
         props.setOpen(false);
     };
 
+    const handleCloseRemove = () => {
+        props.setOpen(false);
+        props.setApiDelete(props.item._id);
+    };
+
     return (
     <Dialog
         open={props.open}
@@ -46,7 +54,7 @@ export default (props: Props) => {
             </DialogContentText>
         </DialogContent>
         <DialogActions className={classes.buttons}>
-            <Button className={classes.buttonRemove} onClick={handleClose} variant="contained" disableElevation>Remove</Button>
+            <Button className={classes.buttonRemove} onClick={handleCloseRemove} variant="contained" disableElevation>Remove</Button>
             <Button className={classes.buttonCancel} onClick={handleClose} variant="contained" disableElevation>Cancel</Button>
         </DialogActions>
     </Dialog>
