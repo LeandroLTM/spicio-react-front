@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './Search-Library.css';
 import Movie from './Movie';
 import { Container, makeStyles,InputBase,InputAdornment,IconButton} from '@material-ui/core';
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';

@@ -13,7 +13,7 @@ export interface Server{
 export const requestApiGetAll = async () =>{
     
     
-    const req = await fetch(API);
+    const req = await fetch(`${API}`);
     return await req.json();
 
 
@@ -23,7 +23,7 @@ export const requestApiGetAll = async () =>{
 }
 
 export const requestApiCreate = async (movie: Server) =>{
-    const respost = await fetch(API, {
+    const respost = await fetch(`${API}`, {
         method: 'post',
         headers: {'Content-Type':'application/json'},
         body: JSON.stringify({
