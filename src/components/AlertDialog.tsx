@@ -9,25 +9,6 @@ type Props = {
     item: Server
 }
 
-const useStyles = makeStyles({
-    buttons:{
-        display: 'flex',
-        justifyContent: 'center'
-    },
-    buttonRemove: {
-        background: '#FE6D8E',
-        color: '#FFFFFF',
-        borderRadius: '10px',
-        width: '40%',
-    },
-    buttonCancel: {
-        background: '#A1A1A1',
-        color: '#FFFFFF',
-        borderRadius: '10px',
-        width: '40%'
-    }
-  })
-
 export default (props: Props) => {
     const classes = useStyles();
 
@@ -60,3 +41,23 @@ export default (props: Props) => {
     </Dialog>
   );
 }
+
+
+const useStyles = makeStyles({
+    buttons:{
+        display: 'flex',
+        justifyContent: 'center'
+    },
+    buttonRemove: {
+        background: '#FE6D8E',
+        color: '#FFFFFF',
+        borderRadius: '10px',
+        width: '40%',
+    },
+    buttonCancel: {
+        background: '#A1A1A1',
+        color: '#FFFFFF',
+        borderRadius: '10px',
+        width: '40%'
+    }
+  })

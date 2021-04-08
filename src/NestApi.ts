@@ -1,5 +1,5 @@
 
-const API = 'https://spicio-api.herokuapp.com/tasks'
+const API = process.env.REACT_APP_API
 
 export interface Server{
     _id: string

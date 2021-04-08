@@ -1,5 +1,5 @@
-const API_KEY = process.env.REACT_APP_API_KEY;
-const API_BASE = process.env.REACT_APP_API_BASE;
+const API_KEY = process.env.REACT_APP_API_OMDB_KEY;
+const API_BASE = process.env.REACT_APP_API_OMDB_BASE;
 
 export interface Movieimcomplet{
     Poster: string,
@@ -17,7 +17,7 @@ export interface Moviecompleted{
 }
 
 export const requestRatings = async (value: string) =>{
-    const req = await fetch(`${API_BASE}${API_KEY}t=${value}`);
+    const req = await fetch(`${API_BASE}apikey=${API_KEY}t=${value}`);
     const json = await req.json();
     return json.imdbRating;
     //return '10';

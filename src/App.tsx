@@ -1,29 +1,8 @@
 import React, {useState} from 'react';
-import { createMuiTheme, ThemeProvider, makeStyles, Grid, Paper, Container} from '@material-ui/core';
+import { createMuiTheme, ThemeProvider, makeStyles, Grid} from '@material-ui/core';
 import Search from './components/Search';
 import Library from './components/Library';
 import HeaderMoovy from './components/HeaderMoovy';
-
-// estilização css
-const useStyles = makeStyles({
-  App: {
-    background: '#ece8e6',
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
-  },
-  listMovies: {
-    display: 'flex',
-    justifyContent: 'start',
-    maxWidth: '75%'
-  },
-  paper: {
-    padding: '30px',
-    textAlign: 'center',
-    color: '#712104',
-  }
-})
 
 
 function App() {
@@ -66,8 +45,27 @@ function App() {
     </ThemeProvider>
   );
   
-  
-  
 }
+
+// Estilização 
+const useStyles = makeStyles({
+  App: {
+    background: '#ece8e6',
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+  listMovies: {
+    display: 'flex',
+    justifyContent: 'start',
+    maxWidth: '75%'
+  },
+  paper: {
+    padding: '30px',
+    textAlign: 'center',
+    color: '#712104',
+  }
+})
 
 export default App;

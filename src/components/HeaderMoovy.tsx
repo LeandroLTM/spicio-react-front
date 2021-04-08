@@ -1,7 +1,25 @@
-import React,{useEffect,useState} from 'react';
-import { makeStyles,Grid, Container} from '@material-ui/core';
+import { makeStyles,} from '@material-ui/core';
 type Props = {
    setselection: Function
+}
+
+export default (props: Props) => {
+    const classes = useStyles();    
+    return (
+        <header className = {classes.header}>
+            <p className = {classes.textMoovy}>Moovy</p>
+            <div className = {classes.searchLibrary}>
+                <p  className = {classes.clickText} 
+                    onClick = {() => {props.setselection('search')} }
+                    >
+                    Search
+                </p>
+                <p className = {classes.clickText} onClick = {() => {props.setselection('library')}}>
+                    My Library
+                </p>
+            </div>
+        </header>
+    );
 }
 
 const useStyles = makeStyles((theme)=>({
@@ -36,23 +54,3 @@ const useStyles = makeStyles((theme)=>({
     }
 
   }))
-
-export default (props: Props) => {
-    const classes = useStyles();    
-    return (
-        <header className = {classes.header}>
-            <p className = {classes.textMoovy}>Moovy</p>
-            <div className = {classes.searchLibrary}>
-                <p  className = {classes.clickText} 
-                    onClick = {() => {props.setselection('search')} }
-                    >
-                    Search
-                </p>
-                <p className = {classes.clickText} onClick = {() => {props.setselection('library')}}>
-                    My Library
-                </p>
-            </div>
-        </header>
-    );
-    
-}

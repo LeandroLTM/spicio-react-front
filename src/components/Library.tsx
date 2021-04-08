@@ -1,23 +1,10 @@
 import React,{useState,useEffect} from 'react';
-//import './Search-Library.css';
 import {makeStyles, Container} from '@material-ui/core';
 import Movie from './Movie';
 import {Server,requestApiGetAll, requestApiDelete} from '../NestApi';
 type Props = {
     
 }
-
-const useStyles = makeStyles({
-    content: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexWrap: 'wrap',
-    },
-    p: {
-        fontSize: '25px',
-    }
-  })
 
 export default (props: Props) => {
     const [apiMovies,setapiMovies] = useState<Server[]>([]);
@@ -57,3 +44,15 @@ export default (props: Props) => {
         </Container>
     );
 }
+
+const useStyles = makeStyles({
+    content: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexWrap: 'wrap',
+    },
+    p: {
+        fontSize: '25px',
+    }
+  })

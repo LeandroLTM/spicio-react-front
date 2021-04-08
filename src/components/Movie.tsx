@@ -12,6 +12,63 @@ type Props = {
     setApiPostDelete: Function
 }
 
+export default (props: Props) => {
+    const classes = useStyles();
+
+    const [ratings, setRatings] = useState<string>('');
+
+    useEffect(() => {
+        const execut = async () =>{
+            const reqRatins = await requestRatings(props.item.title);
+            setRatings(reqRatins);
+        };
+        execut();
+    },[]);
+
+
+    const [open, setOpen] = useState<boolean>(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+    
+    const addMovies = async () => {
+        await requestApiCreate(props.item);
+        console.log('realisou o post')
+        props.setApiPostDelete(true);
+    };
+
+    
+
+    return(
+        <div className = {classes.principal}>
+            <div className = {classes.img} style={{backgroundImage: `url(${props.item.poster})`,}}>
+                {props.pai
+                    ?   <div></div>
+                    :   <IconButton aria-label="delete" >
+                            <PlayCircleFilledWhiteRoundedIcon className={classes.bottonIcon}/>
+                        </IconButton>
+                }
+            </div>
+            
+            <div className = {classes.title}>
+                <p className = {classes.text}>{props.item.title}</p>
+                <div className = {classes.ratings}>
+                    <StarOutlinedIcon style={{color: '#FCC419'}}/>
+                    <p className = {classes.text}>{ratings}</p>
+                </div>
+            </div>
+            {
+                props.pai 
+                    ? <Button onClick = {addMovies} className={classes.buttonAdd} variant="contained" disableElevation>Add to my Library</Button>
+                    : <Button onClick = {handleClickOpen} className={classes.buttonRemove} variant="contained" disableElevation>Remove</Button>
+            }
+            <AlertDialog open ={open}  setOpen ={setOpen} setApiDelete = {props.setApiPostDelete} item = {props.item}></AlertDialog>
+        </div>
+    );
+}
+
+
 const useStyles = makeStyles({
     principal: {
         background: 'rgb(255, 255, 255)',
@@ -72,60 +129,3 @@ const useStyles = makeStyles({
         marginBottom: '8px' 
     }
   })
-// extensão vscode react code snippets criar codigo inicial, exemplo fsc
-
-export default (props: Props) => {
-    const classes = useStyles();
-
-    const [ratings, setRatings] = useState<string>('');
-
-    useEffect(() => {
-        const execut = async () =>{
-            const reqRatins = await requestRatings(props.item.title);
-            setRatings(reqRatins);
-        };
-        execut();
-    },[]);
-
-
-    const [open, setOpen] = useState<boolean>(false);
-
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-    
-    const addMovies = async () => {
-        await requestApiCreate(props.item);
-        console.log('realisou o post')
-        props.setApiPostDelete(true);
-    };
-
-    
-
-    return(
-        <div className = {classes.principal}>
-            <div className = {classes.img} style={{backgroundImage: `url(${props.item.poster})`,}}>
-                {props.pai
-                    ?   <div></div>
-                    :   <IconButton aria-label="delete" >
-                            <PlayCircleFilledWhiteRoundedIcon className={classes.bottonIcon}/>
-                        </IconButton>
-                }
-            </div>
-            
-            <div className = {classes.title}>
-                <p className = {classes.text}>{props.item.title}</p>
-                <div className = {classes.ratings}>
-                    <StarOutlinedIcon style={{color: '#FCC419'}}/>
-                    <p className = {classes.text}>{ratings}</p>
-                </div>
-            </div>
-            {
-                props.pai 
-                    ? <Button onClick = {addMovies} className={classes.buttonAdd} variant="contained" disableElevation>Add to my Library</Button>
-                    : <Button onClick = {handleClickOpen} className={classes.buttonRemove} variant="contained" disableElevation>Remove</Button>
-            }
-            <AlertDialog open ={open}  setOpen ={setOpen} setApiDelete = {props.setApiPostDelete} item = {props.item}></AlertDialog>
-        </div>
-    );
-}
